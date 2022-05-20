@@ -1,0 +1,67 @@
+//Q 1 in C++
+/argv1 inFile[1] a text file that contains English words
+argv2 prints final result of the hash table: from 0 to bucketSize-1, one linked list per line.
+Ex: hashTable[0]:(dummy,Adam)->(Adam,Bob)->(Bob,Cavin)...
+        hashTable[1]:(dummy,Eve)->(Eve,Cindy)->
+        outFile2(argv[3]): For all debugging prints to get partial credit
+
+    III. Data Structure:
+    class listNode{
+    public:
+    -(string) Data
+    -(listNode) next
+    -constructor // create a node(data,null) with given data
+	 
+    HTable class
+    -String Data
+    int bucketSize // set to 29
+    -(listNode) hashTable[] an array of linked list size of bucketSize (in ascending order)
+
+    method:
+    -constructor(..)//dynamically allocates (listNode**)hashTable, size of bucketSize,where each hashTable[1]
+        //point to a dummy node:("dummy",null); it may also perform tasks in main
+        -int hashString
+        -hashInsert
+        -listNode findSpot
+        -printList(index,outFile1) print one linked list of hashTable[index]
+        -printHashTable //output the entire hashTable, call printList() index from 0 to bucketSize-1
+		  
+IV. Main(...)
+        Step 0:inFile <- open input file using arv[1]
+                    bucketSize <- 29
+                    outFile,outFile2
+                    hashTable
+        Step 1: data <- inFile
+        Step 2: index <- hashString
+        Step 3: hashInsert
+        Step4: printList
+        Step 5: repeat step 1 to step 4 until inFile is empty.
+        Step6: print Hashtable (outFile1)
+        Step7: close all files
+
+        V. (int)hashString(data,bucketSize)
+        Step 0:(long int) val = 1
+        length <- string length of Data
+        Step 1: i = 0
+        Step 2 val = val * 32 + (int)data[i]
+        Step 3 repeat step 2 while i < length
+        Step 4: return (val%bucketSize)
+
+        VI. hashInsert(index,data,outFile1,outFile2)
+        step 0 outFile2
+		  step 1 spot <- findSpot //debugging print
+        step 2 if spots next != null and spots next data == Data
+                 outfile <- Data is already in the hashTable, no insertion takes place
+               else
+                 newNode <-using constructor to get a listnode with Data
+                 newNode's next <- spots nexts
+                 spots next <- newNode
+        Step4: outfile2 //debugging print
+
+        IV. (listNode*) findSpot(index,data)
+        Step 1: Spot <- hashTable[index] points to dummy nodes
+        Step 2: if Spots next != null and Spots nexts data < data// C++ use < for string comparison
+                        Spot <-Spot's nexts
+        Step 3:repeat step 2 until condition failed
+        Step 4: return Spot.
+            return 0;
